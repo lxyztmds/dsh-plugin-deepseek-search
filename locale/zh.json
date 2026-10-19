@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "DeepSeek Search & Fetch",
+    "description": "DeepSeek 官方 Search / Fetch API：为模型提供 deepseek_search 与 deepseek_fetch 工具，支持搜索语法、正文抓取、结构化结果与错误重试。"
+  }
+}

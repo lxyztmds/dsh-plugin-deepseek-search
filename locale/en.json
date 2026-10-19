@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "DeepSeek Search & Fetch",
+    "description": "Exposes the official DeepSeek Search / Fetch API as the deepseek_search and deepseek_fetch tools, with search operators, full-page Markdown fetch, structured results, and retries."
+  }
+}

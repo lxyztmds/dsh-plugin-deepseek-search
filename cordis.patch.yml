@@ -1,0 +1,18 @@
+# Bundle patch layer of dsh-plugin-deepseek-search.
+#
+# The row below loads the package's main entry as a host-side Cordis plugin,
+# which registers the model-facing tools `deepseek_search` and `deepseek_fetch`
+# on the deployment's tool registry (ctx.tools).
+#
+# Every value here is a default. Override it from the profile's own
+# cordis.patch.yml with an id-targeted entry:
+#
+#   - id: deepseek-search
+#     config:
+#       count: 5
+#       needContent: false
+- insert:
+    - id: deepseek-search
+      name: dsh-plugin-deepseek-search
+      config:
+        apiKeyEnv: DEEPSEEK_API_KEY

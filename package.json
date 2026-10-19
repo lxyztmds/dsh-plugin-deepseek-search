@@ -1,0 +1,71 @@
+{
+  "name": "dsh-plugin-deepseek-search",
+  "version": "0.1.1",
+  "description": "Official DeepSeek Search and Fetch APIs as the deepseek_search and deepseek_fetch tools for DeepSeek Harness (DSH).",
+  "author": "lxyztmds",
+  "type": "module",
+  "main": "lib/index.js",
+  "icon": "./icon.svg",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lxyztmds/dsh-plugin-deepseek-search.git"
+  },
+  "homepage": "https://github.com/lxyztmds/dsh-plugin-deepseek-search#readme",
+  "bugs": {
+    "url": "https://github.com/lxyztmds/dsh-plugin-deepseek-search/issues"
+  },
+  "exports": {
+    ".": "./lib/index.js",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json"
+  },
+  "files": [
+    "lib",
+    "locale",
+    "scripts",
+    "cordis.patch.yml",
+    "icon.svg",
+    "README.md",
+    "README.en.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test test/client.test.mjs test/format.test.mjs",
+    "test:live": "node test/live-smoke.mjs"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "deepseek",
+    "search",
+    "fetch",
+    "web-search",
+    "cordis"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0",
+    "dsh": ">=0.1.5-rc.1"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.0",
+    "@deepseek-ai/dsh-tools": ">=0.1.5-rc.1 <0.2.0-0 || >=0.2.1-rc.1 <0.3.0-0",
+    "@deepseek-ai/schemastery": "^3.18.2"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/cordis": {
+      "optional": true
+    }
+  }
+}
