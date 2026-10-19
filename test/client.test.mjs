@@ -271,7 +271,13 @@ test('cancelling a Fetch during retry backoff names the Fetch operation', async 
 test('a call that overruns the timeout budget fails as TIMEOUT', async () => {
   const { api } = makeApi(
     (_url, init) => new Promise((_resolve, reject) => {
-      init.signal.addEventListener('abort', () => reject(new DOMException('The operation was aborted.', 'AbortError')))
+      // AbortSignal.timeout uses an unref'd timer, so keep the event loop alive
+      // until the client's deadline fires (Node 22 exits an otherwise idle loop).
+      const keepAlive = setTimeout(() => reject(new Error('test keep-alive expired')), 30_000)
+      init.signal.addEventListener('abort', () => {
+        clearTimeout(keepAlive)
+        reject(new DOMException('The operation was aborted.', 'AbortError'))
+      }, { once: true })
     }),
     { settings: { timeoutMs: 1_000 } },
   )
@@ -290,7 +296,11 @@ test('a timeout while reading a success body is TIMEOUT, not INVALID_RESPONSE', 
       status: 200,
       headers: new Headers(),
       json: () => new Promise((_resolve, reject) => {
-        init.signal.addEventListener('abort', () => reject(new DOMException('The operation was aborted.', 'AbortError')))
+        const keepAlive = setTimeout(() => reject(new Error('test keep-alive expired')), 30_000)
+        init.signal.addEventListener('abort', () => {
+          clearTimeout(keepAlive)
+          reject(new DOMException('The operation was aborted.', 'AbortError'))
+        }, { once: true })
       }),
     }),
     { settings: { timeoutMs: 1_000 } },
